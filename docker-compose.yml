@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+
+  node:
+    build:
+      context: .
+      dockerfile: node.dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - nodeapp-network
+    container_name: demoCompose_Node
+    depends_on: 
+      - mongodb
+      
+  mongodb:
+    image: mongo
+    networks:
+      - nodeapp-network
+    container_name: demoCompose_Mongo
+
+
+networks:
+  nodeapp-network:
+    driver: bridge
+    #network_name: demoCompose_Network
